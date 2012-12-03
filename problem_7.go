@@ -17,7 +17,7 @@ func main() {
 		i := 0
 
 		for ; i < len(primes); i++ {
-			if primes[i] >= x || x%primes[i] == 0 {
+			if x%primes[i] == 0 {
 				break
 			}
 		}
