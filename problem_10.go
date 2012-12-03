@@ -22,8 +22,8 @@ func main() {
 			if x%primes[i] == 0 {
 				break
 			}
-			if primes[i]*2 > x {
-				// Past half the value, it'll never work.
+			if primes[i]*primes[i] > x {
+				// Past sqrt of the value, it'll never work.
 				i = len(primes) // Bail, signaling a prime.
 				break
 			}
@@ -32,12 +32,8 @@ func main() {
 		if i == len(primes) {
 			// Got to end of list... must be prime.
 			primes = append(primes, x)
-			if len(primes)%100 == 0 {
-				fmt.Printf("%v (%v)\r", x, len(primes))
-			}
 		}
 	}
-	fmt.Println()
 
 	sum := int64(0)
 	for i := 0; i < len(primes); i++ {
