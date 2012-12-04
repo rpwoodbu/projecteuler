@@ -19,9 +19,9 @@ func Problem7() int64 {
 				break
 			}
 			if primes[i]*primes[i] > x {
-			  // Past sqrt of the value, it'll never work.
-			  i = len(primes) // Bail, signaling a prime.
-			  break
+				// Past sqrt of the value, it'll never work.
+				i = len(primes) // Bail, signaling a prime.
+				break
 			}
 		}
 
