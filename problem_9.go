@@ -1,4 +1,4 @@
-package main
+package projecteuler
 
 /*
   http://projecteuler.net/problem=9
@@ -12,17 +12,15 @@ package main
   Find the product abc.
 */
 
-import "fmt"
-
-func main() {
+func Problem9() (int, bool) {
 	for a := 0; a < 334; a++ {
 		for b := a + 1; b < 1000-b-a-1; b++ {
 			c := 1000 - b - a
 			if a*a+b*b == c*c {
-				fmt.Printf("%v^2 + %v^2 = %v^2\n", a, b, c)
-				fmt.Printf("abc = %v\n", a*b*c)
-				return
+				return a * b * c, true
 			}
 		}
 	}
+
+	return 0, false
 }

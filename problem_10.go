@@ -1,4 +1,4 @@
-package main
+package projecteuler
 
 /*
   http://projecteuler.net/problem=10
@@ -8,14 +8,12 @@ package main
   Find the sum of all the primes below two million.
 */
 
-import "fmt"
+const PROB10_TARGET = 2000000
 
-const TARGET = 2000000
-
-func main() {
+func Problem10() int64 {
 	primes := []int64{2}
 
-	for x := int64(3); x < TARGET; x += 2 {
+	for x := int64(3); x < PROB10_TARGET; x += 2 {
 		i := 1 // Skip first prime (2) as we are never checking evens.
 
 		for ; i < len(primes); i++ {
@@ -40,5 +38,5 @@ func main() {
 		sum += primes[i]
 	}
 
-	fmt.Println(sum)
+	return sum
 }

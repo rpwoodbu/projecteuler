@@ -1,4 +1,4 @@
-package main
+package projecteuler
 
 /*
   http://projecteuler.net/problem=6
@@ -14,9 +14,7 @@ package main
   Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
 */
 
-import "fmt"
-
-func main() {
+func Problem6() int {
 	sum_of_squares := 0
 	square_of_sums := 0
 
@@ -27,6 +25,5 @@ func main() {
 
 	square_of_sums *= square_of_sums
 
-	fmt.Printf("%v - %v = %v\n",
-		square_of_sums, sum_of_squares, square_of_sums-sum_of_squares)
+	return square_of_sums - sum_of_squares
 }

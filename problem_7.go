@@ -1,4 +1,4 @@
-package main
+package projecteuler
 
 /*
 	http://projecteuler.net/problem=7
@@ -8,9 +8,7 @@ package main
 	What is the 10 001st prime number?
 */
 
-import "fmt"
-
-func main() {
+func Problem7() int64 {
 	primes := []int64{2}
 
 	for x := int64(3); len(primes) < 10001; x++ {
@@ -28,5 +26,5 @@ func main() {
 		}
 	}
 
-	fmt.Println(primes[len(primes)-1])
+	return primes[len(primes)-1]
 }

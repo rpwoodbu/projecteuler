@@ -1,4 +1,4 @@
-package main
+package projecteuler
 
 /*
   http://projecteuler.net/problem=4
@@ -9,7 +9,6 @@ package main
 */
 
 import (
-	"fmt"
 	"sort"
 	"strconv"
 )
@@ -24,7 +23,7 @@ func IsPalindrome(s string) bool {
 	return true
 }
 
-func main() {
+func Problem4() int {
 	palindromes := []int{}
 
 	for x := 999; x > 0; x-- {
@@ -37,5 +36,5 @@ func main() {
 	}
 
 	sort.Ints(palindromes)
-	fmt.Println(palindromes[len(palindromes)-1])
+	return palindromes[len(palindromes)-1]
 }

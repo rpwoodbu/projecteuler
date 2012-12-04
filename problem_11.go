@@ -1,4 +1,4 @@
-package main
+package projecteuler
 
 /*
   http://projecteuler.net/problem=11
@@ -32,11 +32,9 @@ package main
   What is the greatest product of four adjacent numbers in any direction (up, down, left, right, or diagonally) in the 20 x 20 grid?
 */
 
-import "fmt"
+const PROB11_RUNLENGTH = 4
 
-const RUNLENGTH = 4
-
-var GRID = [][]int{
+var PROB11_GRID = [][]int{
 	{8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8},
 	{49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0},
 	{81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65},
@@ -110,12 +108,12 @@ type Technique func([][]int, int, int, int) int
 
 var TECHNIQUES = []Technique{Across, Down, DiagonalSE, DiagonalSW}
 
-func main() {
+func Problem11() int {
 	biggest := 0
-	for x := 0; x < len(GRID[0]); x++ {
-		for y := 0; y < len(GRID); y++ {
+	for x := 0; x < len(PROB11_GRID[0]); x++ {
+		for y := 0; y < len(PROB11_GRID); y++ {
 			for t := 0; t < len(TECHNIQUES); t++ {
-				product := TECHNIQUES[t](GRID, x, y, RUNLENGTH)
+				product := TECHNIQUES[t](PROB11_GRID, x, y, PROB11_RUNLENGTH)
 				if product > biggest {
 					biggest = product
 				}
@@ -123,5 +121,5 @@ func main() {
 		}
 	}
 
-	fmt.Println(biggest)
+	return biggest
 }

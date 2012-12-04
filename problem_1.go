@@ -1,4 +1,4 @@
-package main
+package projecteuler
 
 /*
  http://projecteuler.net/problem=1
@@ -8,9 +8,7 @@ package main
  Find the sum of all the multiples of 3 or 5 below 1000.
 */
 
-import "fmt"
-
-func main() {
+func Problem1() int {
 	sum := 0
 	for x := 0; x < 1000; x++ {
 		if x%3 == 0 || x%5 == 0 {
@@ -18,5 +16,5 @@ func main() {
 		}
 	}
 
-	fmt.Println(sum)
+	return sum
 }

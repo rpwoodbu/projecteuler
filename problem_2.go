@@ -1,4 +1,4 @@
-package main
+package projecteuler
 
 /*
   http://projecteuler.net/problem=2
@@ -9,8 +9,6 @@ package main
 
   By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 */
-
-import "fmt"
 
 func Fibonacci() chan (int) {
 	c := make(chan (int))
@@ -30,7 +28,7 @@ func Fibonacci() chan (int) {
 	return c
 }
 
-func main() {
+func Problem2() int {
 	sum := 0
 	for x := range Fibonacci() {
 		if x >= 4000000 {
@@ -41,5 +39,5 @@ func main() {
 		}
 	}
 
-	fmt.Println(sum)
+	return sum
 }

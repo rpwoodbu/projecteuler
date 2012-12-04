@@ -1,4 +1,4 @@
-package main
+package projecteuler
 
 /*
   http://projecteuler.net/problem=5
@@ -8,9 +8,7 @@ package main
   What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 */
 
-import "fmt"
-
-func main() {
+func Problem5() (int, bool) {
 outer_loop:
 	for x := 1; ; x++ {
 		for y := 2; y <= 20; y++ {
@@ -18,7 +16,8 @@ outer_loop:
 				continue outer_loop
 			}
 		}
-		fmt.Println(x)
-		break
+		return x, true
 	}
+
+	return 0, false
 }

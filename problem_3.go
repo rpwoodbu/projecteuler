@@ -1,4 +1,4 @@
-package main
+package projecteuler
 
 /*
   http://projecteuler.net/problem=3
@@ -8,21 +8,23 @@ package main
   What is the largest prime factor of the number 600851475143 ?
 */
 
-import "fmt"
+const PROB3_TARGET int64 = 600851475143
 
-const TARGET int64 = 600851475143
+func Problem3() int64 {
+	target := PROB3_TARGET
+	var factor int64
 
-func main() {
-	target := TARGET
 	for x := int64(2); x < target; x++ {
 		if target%x == 0 {
-			fmt.Println(x)
+			factor = x
 			target /= x
 			x = 1
 		}
 	}
 
 	if target != 1 {
-		fmt.Println(target)
+		factor = target
 	}
+
+	return factor
 }
