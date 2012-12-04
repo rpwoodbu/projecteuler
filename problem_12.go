@@ -24,8 +24,8 @@ package projecteuler
 
 const PROB12_TARGET = 500
 
-func TriangleNumbers() chan (int64) {
-	c := make(chan (int64))
+func TriangleNumbers() chan int64 {
+	c := make(chan int64)
 
 	go func() {
 		t := int64(1)
