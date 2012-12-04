@@ -60,53 +60,16 @@ func main() {
 		{1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48},
 	}
 
-	origX := len(grid[0])
-	origY := len(grid)
-
-	// Add some idempotent values to the grid to simplify the algo.
-	ends := []int{}
-	for x := 0; x < RUNLENGTH-1; x++ {
-		ends = append(ends, 1)
-	}
-	for x := 0; x < len(grid); x++ {
-		grid[x] = append(grid[x], ends...)
-	}
-
-	bottoms := []int{}
-	for x := 0; x < len(grid[0])+RUNLENGTH-1; x++ {
-		bottoms = append(bottoms, 1)
-	}
-	for x := 0; x < RUNLENGTH-1; x++ {
-		grid = append(grid, bottoms)
-	}
-
 	// Iterate through the grid.
+	techniques := []Technique{Across, Down, DiagonalSE, DiagonalSW}
 	biggest := 0
-	for x := 0; x < origX; x++ {
-		for y := 0; y < origY; y++ {
-			across := Across(grid, x, y, RUNLENGTH)
-			if across > biggest {
-				biggest = across
-				fmt.Println("Across")
-				fmt.Println(x, y, biggest)
-			}
-			down := Down(grid, x, y, RUNLENGTH)
-			if down > biggest {
-				biggest = down
-				fmt.Println("Down")
-				fmt.Println(x, y, biggest)
-			}
-			diagonalSE := DiagonalSE(grid, x, y, RUNLENGTH)
-			if diagonalSE > biggest {
-				biggest = diagonalSE
-				fmt.Println("DiagonalSE")
-				fmt.Println(x, y, biggest)
-			}
-			diagonalSW := DiagonalSW(grid, x, y, RUNLENGTH)
-			if diagonalSW > biggest {
-				biggest = diagonalSW
-				fmt.Println("DiagonalSW")
-				fmt.Println(x, y, biggest)
+	for x := 0; x < len(grid[0]); x++ {
+		for y := 0; y < len(grid); y++ {
+			for t := 0; t < len(techniques); t++ {
+				product := techniques[t](grid, x, y, RUNLENGTH)
+				if product > biggest {
+					biggest = product
+				}
 			}
 		}
 	}
@@ -114,7 +77,13 @@ func main() {
 	fmt.Println(biggest)
 }
 
+type Technique func([][]int, int, int, int) int
+
 func Across(grid [][]int, x, y, l int) int {
+	if len(grid[y]) < x+l {
+		return 0
+	}
+
 	product := 1
 	for i := 0; i < l; i++ {
 		product *= grid[y][x+i]
@@ -123,6 +92,10 @@ func Across(grid [][]int, x, y, l int) int {
 }
 
 func Down(grid [][]int, x, y, l int) int {
+	if len(grid) < y+l {
+		return 0
+	}
+
 	product := 1
 	for i := 0; i < l; i++ {
 		product *= grid[y+i][x]
@@ -131,6 +104,10 @@ func Down(grid [][]int, x, y, l int) int {
 }
 
 func DiagonalSE(grid [][]int, x, y, l int) int {
+	if len(grid[y]) < x+l || len(grid) < y+l {
+		return 0
+	}
+
 	product := 1
 	for i := 0; i < l; i++ {
 		product *= grid[y+i][x+i]
@@ -139,12 +116,12 @@ func DiagonalSE(grid [][]int, x, y, l int) int {
 }
 
 func DiagonalSW(grid [][]int, x, y, l int) int {
-	// This is a bit of a hack.  The x, y specified is actually not
-	// measured.  It defines the opposite angle of the hypotenuse
-	// we're actually measuring.  This simplifies the algo.
+	if x < l-1 || len(grid) < y+l {
+		return 0
+	}
 	product := 1
 	for i := 0; i < l; i++ {
-		product *= grid[y+i][x+l-1-i]
+		product *= grid[y+i][x-i]
 	}
 	return product
 }
