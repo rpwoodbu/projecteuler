@@ -1,14 +1,13 @@
 package projecteuler
 
-import "testing"
-import "fmt"
 import "strconv"
+import "testing"
 
 func AddNumbersHelper(t *testing.T, numbers ...int) {
 	sum := 0
 	var lines []string
 	for _, n := range numbers {
-		lines = append(lines, fmt.Sprintf("%d", n))
+		lines = append(lines, strconv.Itoa(n))
 		sum += n
 	}
 

@@ -107,7 +107,7 @@ package projecteuler
   53503534226472524250874054075591789781264330331690
 */
 
-import "fmt"
+import "strconv"
 
 var digitLines = []string{
 	"37107287533902102798797998220837590246510135740250",
@@ -226,7 +226,7 @@ func AddBigNumbers(lines []string) string {
 
 	var result string
 	for _, x := range sum {
-		result += fmt.Sprintf("%d", x)
+		result += strconv.Itoa(x)
 	}
 
 	return result
