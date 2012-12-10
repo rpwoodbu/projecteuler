@@ -214,20 +214,17 @@ var digitLines = []string{
 
 // All numbers in array must have the same number of digits.
 func AddBigNumbers(lines []string) string {
-	sum := make([]int, len(lines[0]))
-	carry := 0
+	sum := make([]int, len(lines[0])+1)
 
-	for i := len(lines[0]) - 1; i > -1; i-- {
-		sum[i] = carry
-		carry = 0
+	for i := len(lines[0]); i > 0; i-- {
 		for _, line := range lines {
-			sum[i] += int(line[i] - '0')
+			sum[i] += int(line[i-1] - '0')
 		}
-		carry = sum[i] / 10
+		sum[i-1] = sum[i] / 10
 		sum[i] %= 10
 	}
 
-	result := fmt.Sprintf("%d", carry)
+	var result string
 	for _, x := range sum {
 		result += fmt.Sprintf("%d", x)
 	}

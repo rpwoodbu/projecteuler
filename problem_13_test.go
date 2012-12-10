@@ -6,7 +6,7 @@ import "strconv"
 
 func AddNumbersHelper(t *testing.T, numbers ...int) {
 	sum := 0
-	lines := []string{}
+	var lines []string
 	for _, n := range numbers {
 		lines = append(lines, fmt.Sprintf("%d", n))
 		sum += n
