@@ -19,6 +19,25 @@ package projecteuler
   NOTE: Once the chain starts the terms are allowed to go above one million.
 */
 
+func CollatzCounter(start int) int {
+	count := 1
+
+	n := int64(start)
+	for n != 1 {
+		count++
+		if n%2 == 0 { // Even
+			n /= 2
+		} else { // Odd
+			n = (3 * n) + 1
+		}
+	}
+
+	return count
+}
+
+// This function isn't used by the problem, but is included
+// to demonstrate the correctness of the algorithm, and is
+// tested by the unit tests.
 func Collatz(start int) chan int64 {
 	c := make(chan int64)
 
@@ -45,10 +64,7 @@ func Problem14() int {
 	var biggestCountStart int
 
 	for start := 1; start < 1000000; start++ {
-		count := 0
-		for _ = range Collatz(start) {
-			count++
-		}
+		count := CollatzCounter(start)
 		if count > biggestCount {
 			biggestCount = count
 			biggestCountStart = start

@@ -18,6 +18,11 @@ func TestCollatz(t *testing.T) {
 	CollatzHelper([]int64{1}, t) // Edge case.
 }
 
+func TestCollatzCounter(t *testing.T) {
+	AssertInt(CollatzCounter(13), 10, t)
+	AssertInt(CollatzCounter(1), 1, t) // Edge case.
+}
+
 func TestProblem14(t *testing.T) {
 	expected := 837799
 	answer := Problem14()
