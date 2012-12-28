@@ -24,7 +24,7 @@ func TestCollatzCounter(t *testing.T) {
 }
 
 func TestProblem14(t *testing.T) {
-	expected := 837799
+	expected := int64(837799)
 	answer := Problem14()
 	if expected != answer {
 		t.Fatalf("Got %v, expected %v.", answer, expected)

@@ -19,11 +19,17 @@ package projecteuler
   NOTE: Once the chain starts the terms are allowed to go above one million.
 */
 
-func CollatzCounter(start int) int {
+var collatzCache = make(map[int64]int)
+
+func CollatzCounter(start int64) int {
 	count := 1
 
-	n := int64(start)
+	n := start
 	for n != 1 {
+		if cached, ok := collatzCache[n]; ok {
+			count += cached
+			break
+		}
 		count++
 		if n%2 == 0 { // Even
 			n /= 2
@@ -32,6 +38,7 @@ func CollatzCounter(start int) int {
 		}
 	}
 
+	collatzCache[start] = count
 	return count
 }
 
@@ -59,11 +66,11 @@ func Collatz(start int) chan int64 {
 	return c
 }
 
-func Problem14() int {
+func Problem14() int64 {
 	biggestCount := 0
-	var biggestCountStart int
+	var biggestCountStart int64
 
-	for start := 1; start < 1000000; start++ {
+	for start := int64(1); start < 1000000; start++ {
 		count := CollatzCounter(start)
 		if count > biggestCount {
 			biggestCount = count
