@@ -17,13 +17,8 @@ func GridRouteCounter(x, y int) int64 {
 	cache[i] = make([]int64, y+1)
   }
 
-  // Seed the cache with some initial bottom-right values:
-  //
-  //       * 1
-  //       |
-  // 1 *---+ 0
-  cache[x][y-1] = 1
-  cache[x-1][y] = 1
+  // Seed the cache with an initial bottom-right value:
+  cache[x][y] = 1
 
   return GridRouteLookup(0, 0, cache)
 }
