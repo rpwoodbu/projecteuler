@@ -22,5 +22,6 @@ func TestFactorial(t *testing.T) {
 }
 
 func TestProblem20(t *testing.T) {
+	t.Parallel()
 	AssertInt(Problem20(), 648, t)
 }

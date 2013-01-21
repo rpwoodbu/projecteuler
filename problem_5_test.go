@@ -7,5 +7,6 @@ func TestFindSmallestNumber(t *testing.T) {
 }
 
 func TestProblem5(t *testing.T) {
+	t.Parallel()
 	AssertInt(Problem5(), 232792560, t)
 }

@@ -7,5 +7,6 @@ func TestPowerTwoDigitSum(t *testing.T) {
 }
 
 func TestProblem16(t *testing.T) {
+	t.Parallel()
 	AssertInt(Problem16(), 1366, t)
 }

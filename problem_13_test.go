@@ -31,6 +31,7 @@ func TestAddBigNumbers(t *testing.T) {
 }
 
 func TestProblem13(t *testing.T) {
+	t.Parallel()
 	expected := "5537376230"
 	answer := Problem13()
 	if expected != answer {

@@ -8,5 +8,6 @@ func TestSumOfDivisors(t *testing.T) {
 }
 
 func TestProblem21(t *testing.T) {
+	t.Parallel()
 	AssertInt(Problem21(), 31626, t)
 }

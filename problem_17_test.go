@@ -19,5 +19,6 @@ func TestNumbersLetterCount(t *testing.T) {
 }
 
 func TestProblem17(t *testing.T) {
+	t.Parallel()
 	AssertInt(Problem17(), 21124, t)
 }

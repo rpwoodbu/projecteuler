@@ -24,6 +24,7 @@ func TestCollatzCounter(t *testing.T) {
 }
 
 func TestProblem14(t *testing.T) {
+	t.Parallel()
 	expected := int64(837799)
 	answer := Problem14()
 	if expected != answer {

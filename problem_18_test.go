@@ -14,5 +14,6 @@ func TestMaxPath(t *testing.T) {
 }
 
 func TestProblem18(t *testing.T) {
+	t.Parallel()
 	AssertInt(Problem18(), 1074, t)
 }

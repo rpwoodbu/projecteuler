@@ -18,5 +18,6 @@ func TestAlphaValue(t *testing.T) {
 }
 
 func TestProblem22(t *testing.T) {
+	t.Parallel()
 	AssertInt(Problem22(), 871198282, t)
 }

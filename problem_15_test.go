@@ -8,5 +8,6 @@ func TestGridRouteCounter(t *testing.T) {
 }
 
 func TestProblem15(t *testing.T) {
+	t.Parallel()
 	AssertInt64(Problem15(), 137846528820, t)
 }

@@ -19,5 +19,6 @@ func TestNextDate(t *testing.T) {
 }
 
 func TestProblem19(t *testing.T) {
+	t.Parallel()
 	AssertInt(Problem19(), 171, t)
 }
