@@ -12,6 +12,9 @@ package projecteuler
 	Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 */
 
+import "sort"
+//import "log"
+
 // Returns 0 if number is perfect, -1 if deficient, and 1 if abundant.
 func IsPerfectNumber(n int) int {
 	sum := SumOfDivisors(n)
@@ -27,18 +30,25 @@ func IsPerfectNumber(n int) int {
 }
 
 func FindNotSumOfAbundants(upperBound int) (sum int) {
-	abundants := make(map[int]bool)
+	abundants := []int{}
 	for n := 1; n <= upperBound; n++ {
 		if IsPerfectNumber(n) == 1 {
-			abundants[n] = true
+			abundants = append(abundants, n)
 		}
 	}
 
+	//log.Print(abundants)
+
 candidate:
 	for n := 1; n <= upperBound; n++ {
-		for abundant := range abundants {
-			_, exists := abundants[n-abundant]
-			if exists {
+		for _, abundant := range abundants {
+			if abundant >= n {
+				break
+			}
+			//log.Printf("n=%v abundant=%v", n, abundant)
+			i := sort.SearchInts(abundants, n-abundant)
+			if abundants[i] == n-abundant {
+				//log.Print("%v exists", n-abundant)
 				continue candidate
 			}
 		}
