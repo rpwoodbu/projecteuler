@@ -39,7 +39,7 @@ func TestFirstToHaveNumDivisors(t *testing.T) {
 	if ok {
 		AssertInt64(result, 28, t)
 	} else {
-		t.Fatal("Returned not ok.")
+		t.Error("Returned not ok.")
 	}
 }
 
@@ -49,6 +49,6 @@ func TestProblem12(t *testing.T) {
 	if ok {
 		AssertInt64(result, 76576500, t)
 	} else {
-		t.Fatal("Returned not ok.")
+		t.Error("Returned not ok.")
 	}
 }

@@ -8,6 +8,6 @@ func TestProblem9(t *testing.T) {
 	if ok {
 		AssertInt(result, 31875000, t)
 	} else {
-		t.Fatal("Returned not ok.")
+		t.Error("Returned not ok.")
 	}
 }

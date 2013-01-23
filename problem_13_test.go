@@ -35,6 +35,6 @@ func TestProblem13(t *testing.T) {
 	expected := "5537376230"
 	answer := Problem13()
 	if expected != answer {
-		t.Fatalf("Got %v, expected %v.", answer, expected)
+		t.Errorf("Got %v, expected %v.", answer, expected)
 	}
 }
