@@ -12,9 +12,18 @@ package projecteuler
 */
 
 func SumOfDivisors(n int) (sum int) {
-	for x := n / 2; x > 0; x-- {
+	sum = 1
+	// The +1 on the bound is just to make sure that "4" makes it into the loop.
+	for x, bound := 2, (n/2)+1; x < bound; x++ {
 		if n%x == 0 {
 			sum += x
+			bound = n / x
+			if bound == x {
+				// This is a perfect square, so don't record the divisor twice.
+				// This also means we're done.
+				break
+			}
+			sum += bound
 		}
 	}
 	return
