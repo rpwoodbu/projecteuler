@@ -29,8 +29,11 @@ func IsPerfectNumber(n int) int {
 	panic("Unreachable code reached.")
 }
 
+var abundants = []int{}
+var value int
+
 func FindNotSumOfAbundants(upperBound int) (sum int) {
-	abundants := []int{}
+	//abundants := []int{}
 	for n := 1; n <= upperBound; n++ {
 		if IsPerfectNumber(n) == 1 {
 			abundants = append(abundants, n)
@@ -38,7 +41,6 @@ func FindNotSumOfAbundants(upperBound int) (sum int) {
 	}
 
 	//log.Print(abundants)
-
 candidate:
 	for n := 1; n <= upperBound; n++ {
 		for _, abundant := range abundants {
@@ -46,7 +48,9 @@ candidate:
 				break
 			}
 			//log.Printf("n=%v abundant=%v", n, abundant)
-			i := sort.SearchInts(abundants, n-abundant)
+			//i := sort.SearchInts(abundants, n-abundant)
+			value = n-abundant
+			i := sort.Search(len(abundants), IsGreaterOrEqual)
 			if abundants[i] == n-abundant {
 				//log.Print("%v exists", n-abundant)
 				continue candidate
@@ -57,6 +61,10 @@ candidate:
 	}
 
 	return
+}
+
+func IsGreaterOrEqual(i int) bool {
+	return abundants[i] >= value
 }
 
 func Problem23() int {
