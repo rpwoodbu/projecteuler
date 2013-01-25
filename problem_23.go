@@ -12,9 +12,6 @@ package projecteuler
 	Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 */
 
-import "sort"
-//import "log"
-
 // Returns 0 if number is perfect, -1 if deficient, and 1 if abundant.
 func IsPerfectNumber(n int) int {
 	sum := SumOfDivisors(n)
@@ -29,30 +26,27 @@ func IsPerfectNumber(n int) int {
 	panic("Unreachable code reached.")
 }
 
-var abundants = []int{}
-var value int
-
 func FindNotSumOfAbundants(upperBound int) (sum int) {
-	//abundants := []int{}
+	// Seed abundants[0] = false so that array index is the actual number.
+	abundants := []bool{false}
 	for n := 1; n <= upperBound; n++ {
 		if IsPerfectNumber(n) == 1 {
-			abundants = append(abundants, n)
+			abundants = append(abundants, true)
+		} else {
+			abundants = append(abundants, false)
 		}
 	}
 
-	//log.Print(abundants)
 candidate:
 	for n := 1; n <= upperBound; n++ {
-		for _, abundant := range abundants {
-			if abundant >= n {
+		for i := 1; i < len(abundants); i++ {
+			if !abundants[i] {
+				continue
+			}
+			if i >= n {
 				break
 			}
-			//log.Printf("n=%v abundant=%v", n, abundant)
-			//i := sort.SearchInts(abundants, n-abundant)
-			value = n-abundant
-			i := sort.Search(len(abundants), IsGreaterOrEqual)
-			if abundants[i] == n-abundant {
-				//log.Print("%v exists", n-abundant)
+			if abundants[n-i] {
 				continue candidate
 			}
 		}
@@ -61,10 +55,6 @@ candidate:
 	}
 
 	return
-}
-
-func IsGreaterOrEqual(i int) bool {
-	return abundants[i] >= value
 }
 
 func Problem23() int {
