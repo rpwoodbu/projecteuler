@@ -19,8 +19,8 @@ func TestCollatz(t *testing.T) {
 }
 
 func TestCollatzCounter(t *testing.T) {
-	AssertInt(CollatzCounter(13), 10, t)
-	AssertInt(CollatzCounter(1), 1, t) // Edge case.
+	AssertInt(CollatzCounter(13, []int{}), 10, t)
+	AssertInt(CollatzCounter(1, []int{}), 1, t) // Edge case.
 }
 
 func TestProblem14(t *testing.T) {
