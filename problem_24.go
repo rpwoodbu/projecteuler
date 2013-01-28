@@ -12,7 +12,9 @@ package projecteuler
 
 func Permute(place int, used []bool, sofar []int, c chan []int, closer bool) {
 	if place < 0 {
-		c <- sofar
+		permutation := make([]int, len(sofar))
+		copy(permutation, sofar)
+		c <- permutation
 		return
 	}
 
@@ -32,7 +34,7 @@ func Permute(place int, used []bool, sofar []int, c chan []int, closer bool) {
 func Permutations(numValues int) chan []int {
 	c := make(chan []int)
 
-	go Permute(numValues-1, make([]bool, numValues), []int{}, c, true)
+	go Permute(numValues-1, make([]bool, numValues), make([]int, 0, numValues), c, true)
 
 	return c
 }
