@@ -3,13 +3,13 @@ package projecteuler
 import "testing"
 
 func TestPermutations(t *testing.T) {
-	permutationsOf3 := [][]int{
-		[]int{0, 1, 2},
-		[]int{0, 2, 1},
-		[]int{1, 0, 2},
-		[]int{1, 2, 0},
-		[]int{2, 0, 1},
-		[]int{2, 1, 0},
+	permutationsOf3 := [][]byte{
+		[]byte{0, 1, 2},
+		[]byte{0, 2, 1},
+		[]byte{1, 0, 2},
+		[]byte{1, 2, 0},
+		[]byte{2, 0, 1},
+		[]byte{2, 1, 0},
 	}
 
 	testPermutations := Permutations(3)
