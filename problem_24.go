@@ -11,7 +11,7 @@ package projecteuler
 */
 
 func Permute(place int, used []bool, sofar []byte, c chan []byte, closer bool) {
-	if place < 0 {
+	if place == 0 {
 		permutation := make([]byte, len(sofar))
 		copy(permutation, sofar)
 		c <- permutation
@@ -34,7 +34,7 @@ func Permute(place int, used []bool, sofar []byte, c chan []byte, closer bool) {
 func Permutations(numValues int) chan []byte {
 	c := make(chan []byte)
 
-	go Permute(numValues-1, make([]bool, numValues), make([]byte, 0, numValues), c, true)
+	go Permute(numValues, make([]bool, numValues), make([]byte, 0, numValues), c, true)
 
 	return c
 }
