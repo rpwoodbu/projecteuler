@@ -10,7 +10,7 @@ package projecteuler
 	What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 */
 
-func Permute(place int, used []bool, sofar []byte, c chan []byte, closer bool) {
+func Permute(place int, used []bool, sofar []byte, c chan<- []byte, closer bool) {
 	if place == 0 {
 		permutation := make([]byte, len(sofar))
 		copy(permutation, sofar)
@@ -31,7 +31,7 @@ func Permute(place int, used []bool, sofar []byte, c chan []byte, closer bool) {
 	}
 }
 
-func Permutations(numValues int) chan []byte {
+func Permutations(numValues int) <-chan []byte {
 	c := make(chan []byte)
 
 	go Permute(numValues, make([]bool, numValues), make([]byte, 0, numValues), c, true)
