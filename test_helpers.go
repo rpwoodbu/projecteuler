@@ -38,3 +38,9 @@ func AssertIntArray(got []int, expected []int, t *testing.T) {
 		}
 	}
 }
+
+func AssertString(got string, expected string, t *testing.T) {
+	if got != expected {
+		t.Errorf("Expected false, got true")
+	}
+}
