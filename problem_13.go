@@ -213,25 +213,47 @@ var digitLines = []string{
 }
 
 // All numbers in array must have the same number of digits.
-func AddBigNumbers(lines []string) string {
-	sum := make([]int, len(lines[0])+1)
+func AddBigNumbers(numbers [][]int) []int {
+	sum := make([]int, len(numbers[0])+1)
 
-	for i := len(lines[0]); i > 0; i-- {
-		for _, line := range lines {
-			sum[i] += int(line[i-1] - '0')
+	for i := len(numbers[0]); i > 0; i-- {
+		for _, number := range numbers {
+			sum[i] += number[i-1]
 		}
 		sum[i-1] = sum[i] / 10
 		sum[i] %= 10
 	}
 
-	var result string
-	for _, x := range sum {
-		result += strconv.Itoa(x)
+	if sum[0] == 0 {
+		// Remove leading zero.
+		sum = sum[1:]
 	}
 
-	return result
+	return sum
+}
+
+func IntArrayToString(number []int) (result string) {
+	for _, x := range number {
+		result += strconv.Itoa(x)
+	}
+	return
+}
+
+func StringToIntArray(number string) (result []int) {
+	for _, x := range number {
+		result = append(result, int(x)-'0')
+	}
+	return
+}
+
+func AddBigStringNumbers(lines []string) string {
+	numbers := [][]int{}
+	for _, line := range lines {
+		numbers = append(numbers, StringToIntArray(line))
+	}
+	return IntArrayToString(AddBigNumbers(numbers))
 }
 
 func Problem13() string {
-	return AddBigNumbers(digitLines)[:10]
+	return AddBigStringNumbers(digitLines)[:10]
 }
