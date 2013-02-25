@@ -75,11 +75,14 @@ func FiniteUnitFraction(d int) (df DecimalFraction) {
 
 func Problem26() int {
 	var longestCycle, longestCycleDenominator int
-	for d := 3; d < 1000; d += 2 {
-		df := FiniteUnitFraction(d)
+	for d := range Primes() {
+		if d >= 1000 {
+			break
+		}
+		df := FiniteUnitFraction(int(d))
 		if len(df.repeatingDigits) > longestCycle {
 			longestCycle = len(df.repeatingDigits)
-			longestCycleDenominator = d
+			longestCycleDenominator = int(d)
 		}
 	}
 	return longestCycleDenominator
