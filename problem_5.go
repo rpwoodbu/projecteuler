@@ -8,15 +8,14 @@ package projecteuler
   What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 */
 
-func FindSmallestNumber(limit int) int {
-	primes := []int{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97}
-	result := 1
+func FindSmallestNumber(limit int64) int64 {
+	result := int64(1)
 
-	for _, prime := range primes {
+	for prime := range Primes() {
 		if prime > limit {
 			break
 		}
-		multiple := 1
+		multiple := int64(1)
 		for multiple < limit {
 			multiple *= prime
 		}
@@ -26,6 +25,6 @@ func FindSmallestNumber(limit int) int {
 	return result
 }
 
-func Problem5() int {
+func Problem5() int64 {
 	return FindSmallestNumber(20)
 }

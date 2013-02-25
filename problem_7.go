@@ -8,28 +8,38 @@ package projecteuler
 	What is the 10 001st prime number?
 */
 
-func Problem7() int64 {
-	primes := []int64{2}
+func Primes() chan int64 {
+	c := make(chan int64)
 
-	for x := int64(3); len(primes) < 10001; x++ {
-		i := 0
+	go func() {
+		c <- 2
+		primes := []int64{}
 
-		for ; i < len(primes); i++ {
-			if x%primes[i] == 0 {
-				break
+	candidate:
+		for x := int64(3); ; x += 2 {
+			for _, prime := range primes {
+				if x%prime == 0 {
+					continue candidate
+				}
+				if prime*prime > x {
+					// Past sqrt of the value, it'll never work.
+					break
+				}
 			}
-			if primes[i]*primes[i] > x {
-				// Past sqrt of the value, it'll never work.
-				i = len(primes) // Bail, signaling a prime.
-				break
-			}
-		}
 
-		if i == len(primes) {
 			// Got to end of list... must be prime.
+			c <- x
 			primes = append(primes, x)
 		}
-	}
+	}()
 
-	return primes[len(primes)-1]
+	return c
+}
+
+func Problem7() int64 {
+	primes := Primes()
+	for x := 0; x < 10000; x++ {
+		<-primes
+	}
+	return <-primes
 }
